@@ -347,7 +347,9 @@ extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.setTorchActive(isOn: false)
+                #if !targetEnvironment(simulator)
                 strongSelf.moveImageViews(qrCode: stringValue, corners: readableObject.corners)
+                #endif
             }
         }
     }
